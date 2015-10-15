@@ -14,7 +14,8 @@
         "phpunit/phpunit": "~4.0",
         "mockery/mockery": "^0.9.4",
         "swiftmailer/swiftmailer": "*",
-        "maknz/slack": "*"
+        "maknz/slack": "*",
+        "twilio/sdk": "*"
     },
     "autoload": {
         "psr-4": {

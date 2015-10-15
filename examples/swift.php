@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/vendor/autoload.php';
+<?php require dirname(__DIR__) . '/vendor/autoload.php';
 
 use Pete001\Alerter\EventManager;
 use Pete001\Alerter\Services\Service\SwiftMailer as SwiftMailerService;
