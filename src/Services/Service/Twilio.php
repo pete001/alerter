@@ -3,7 +3,7 @@
 use Pete001\Alerter\Services\Sms\SmsAlertInterface;
 use Pete001\Alerter\AlertInterface;
 
-class Sms implements ServiceInterface
+class Twilio implements ServiceInterface
 {
     protected $sms;
 

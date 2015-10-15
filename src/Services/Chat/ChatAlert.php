@@ -1,8 +1,8 @@
-<?php namespace Pete001\Alerter\Services\Slack;
+<?php namespace Pete001\Alerter\Services\Chat;
 
 use Pete001\Alerter\Alert;
 
-class SlackAlert extends Alert implements SlackAlertInterface
+class ChatAlert extends Alert implements ChatAlertInterface
 {
     protected $user;
     protected $channel;
@@ -15,12 +15,12 @@ class SlackAlert extends Alert implements SlackAlertInterface
         $this->channel = $channel;
     }
 
-    public function getSlackUser()
+    public function getUser()
     {
         return $this->user;
     }
 
-    public function getSlackChannel()
+    public function getChannel()
     {
         return $this->channel;
     }
