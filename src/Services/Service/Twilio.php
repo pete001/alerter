@@ -1,6 +1,7 @@
 <?php namespace Pete001\Alerter\Services\Service;
 
 use Pete001\Alerter\Services\Sms\SmsAlertInterface;
+use Pete001\Alerter\Services\ServiceInterface;
 use Pete001\Alerter\AlertInterface;
 
 class Twilio implements ServiceInterface

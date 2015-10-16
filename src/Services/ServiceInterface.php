@@ -1,4 +1,4 @@
-<?php namespace Pete001\Alerter\Services\Service;
+<?php namespace Pete001\Alerter\Services;
 
 use Pete001\Alerter\AlertInterface;
 

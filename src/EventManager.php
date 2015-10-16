@@ -1,6 +1,6 @@
 <?php namespace Pete001\Alerter;
 
-use Pete001\Alerter\Services\Service\ServiceInterface;
+use Pete001\Alerter\Services\ServiceInterface;
 
 /**
  * The event manager will send an alert to all relevant services
