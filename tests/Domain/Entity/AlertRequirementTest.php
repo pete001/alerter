@@ -1,11 +1,11 @@
 <?php namespace Pete001\Alerter;
 
 use Pete001\Alerter\Domain\Entity\AbstractMotherEntity;
-use Pete001\Alerter\Domain\Entity\AlertRequirements;
+use Pete001\Alerter\Domain\Entity\AlertRequirement;
 
-class AlertRequirementsTest extends \PHPUnit_Framework_TestCase
+class AlertRequirementTest extends \PHPUnit_Framework_TestCase
 {
-    public function testAlertRequirementsSetGet()
+    public function testAlertRequirementSetGet()
     {
         $set = [
             'title' => 'API Key',
@@ -13,9 +13,9 @@ class AlertRequirementsTest extends \PHPUnit_Framework_TestCase
             'required' => 1
         ];
 
-        $alertRequirementsEntity = new AlertRequirements($set);
+        $alertRequirementEntity = new AlertRequirement($set);
         foreach ($set as $key => $value) {
-            $this->assertEquals($value, $alertRequirementsEntity->$key);
+            $this->assertEquals($value, $alertRequirementEntity->$key);
         }
     }
 }

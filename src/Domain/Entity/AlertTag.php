@@ -5,7 +5,7 @@
  *
  * @author Pete Cheyne <pete.cheyne@gmail.com>
  */
-class AlertTags extends AbstractEntity
+class AlertTag extends AbstractEntity
 {
     protected $title;
 }

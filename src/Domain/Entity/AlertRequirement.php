@@ -1,12 +1,14 @@
 <?php namespace Pete001\Alerter\Domain\Entity;
 
 /**
- * The available hooks that alerts can be triggered against
+ * The alert entity defines all the valid alert apps that exist
  *
  * @author Pete Cheyne <pete.cheyne@gmail.com>
  */
-class AlertHooks extends AbstractEntity
+class AlertRequirement extends AbstractEntity
 {
     protected $title;
     protected $short_description;
+    protected $required;
+    protected $alert_id;
 }
