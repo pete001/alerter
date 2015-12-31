@@ -7,4 +7,4 @@ use Pete001\Alerter\Domain\Entity\AlertGroup;
 $strategy = new StrategyFactory();
 $group = $strategy->initialise(new AlertGroup(['title' => 'chat']));
 $service = $group->create(new Alert(['title' => 'slack']));
-$result = $service->send();
+$result = $service->send('Test message');

@@ -9,5 +9,11 @@ use Pete001\Alerter\Domain\Entity\Alert;
  */
 interface AlertStrategyInterface
 {
-	public function send();
+	/**
+	 * All alerts must implement a send method, passing a message string
+	 *
+	 * @param  String $message The message to send
+	 * @return Mixed           The relevant alert response
+	 */
+	public function send($message);
 }

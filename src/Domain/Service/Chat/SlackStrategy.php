@@ -10,9 +10,53 @@ use Maknz\Slack\Client as SlackClient;
  */
 class SlackStrategy implements ChatStrategyInterface
 {
-	public function send()
+	/**
+	 * The Slack client
+	 *
+	 * @var Object
+	 */
+	private $client;
+
+	/**
+	 * Initialise the client
+	 */
+	public function __construct()
 	{
-		$slack = new SlackClient('');
-		$slack->from('pete.cheyne')->to('#hubot-dev')->send('testing');
+		$this->client = new SlackClient($this->getAuth());
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getAuth()
+	{
+		return 'https://hooks.slack.com/services/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';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getUser()
+	{
+		return 'pete.cheyne';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getChannel()
+	{
+		return '#hubot-dev';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function send($message)
+	{
+		return $this->client
+			->from($this->getUser())
+			->to($this->getChannel())
+			->send($message);
 	}
 }
