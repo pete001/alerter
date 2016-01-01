@@ -10,6 +10,13 @@ use Pete001\Alerter\Domain\Entity\Alert;
 interface AlertStrategyInterface
 {
 	/**
+	 * Returns the relevant client
+	 *
+	 * @return Object
+	 */
+	public function getClient();
+
+	/**
 	 * All alerts must implement a send method, passing a message string
 	 *
 	 * @param  String $message The message to send

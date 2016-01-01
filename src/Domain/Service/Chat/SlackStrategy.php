@@ -52,9 +52,17 @@ class SlackStrategy implements ChatStrategyInterface
 	/**
 	 * @inheritdoc
 	 */
+	public function getClient()
+	{
+		return $this->client;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function send($message)
 	{
-		return $this->client
+		return $this->getClient()
 			->from($this->getUser())
 			->to($this->getChannel())
 			->send($message);

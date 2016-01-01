@@ -101,6 +101,14 @@ class SwiftStrategy implements EmailStrategyInterface
 	/**
 	 * @inheritdoc
 	 */
+	public function getClient()
+	{
+		return $this->client;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function send($message)
 	{
 		$email = \Swift_Message::newInstance($this->getSubject())
@@ -108,6 +116,6 @@ class SwiftStrategy implements EmailStrategyInterface
 			->setTo($this->getToAddress())
 			->setBody($message);
 
-		$this->client->send($email);
+		$this->getClient()->send($email);
 	}
 }
