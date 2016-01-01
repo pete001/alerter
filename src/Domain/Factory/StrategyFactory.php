@@ -16,6 +16,9 @@ class StrategyFactory
 			case 'chat':
 				return new ChatStrategyFactory();
 				break;
+			case 'email':
+				return new EmailStrategyFactory();
+				break;
 			default:
 				throw new \ErrorException("Invalid strategy group ({$group->title}) attempted");
 		}

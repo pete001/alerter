@@ -13,7 +13,7 @@ class ChatStrategyFactory
 	public function create(Alert $alert)
 	{
 		switch ($alert->title) {
-			case "slack":
+			case 'slack':
 				return new SlackStrategy();
 				break;
 			default:
