@@ -11,7 +11,7 @@ interface SmsStrategyInterface extends AlertStrategyInterface
 	 * All sms alerts require authentication with the 3rd party
 	 * @return String
 	 */
-	//public function getAuth();
+	public function getAuth();
 
 	/**
 	 * Get the sender phone number

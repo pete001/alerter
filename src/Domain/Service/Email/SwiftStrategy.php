@@ -7,7 +7,7 @@ use Pete001\Alerter\Domain\Service\EmailStrategyInterface;
  *
  * @author Pete Cheyne <pete.cheyne@gmail.com>
  */
-class SwiftStrategy implements EmailStrategyInterface
+class SwiftStrategy implements EmailStrategyInterface, SwiftStrategyInterface
 {
 	/**
 	 * The Slack client
@@ -21,13 +21,13 @@ class SwiftStrategy implements EmailStrategyInterface
 	 */
 	public function __construct()
 	{
-		$this->client = \Swift_Mailer::newInstance($this->setTransport());
+		$this->client = \Swift_Mailer::newInstance($this->getAuth());
 	}
 
 	/**
 	 * Initialise the client
 	 */
-	public function setTransport()
+	public function getAuth()
 	{
 		return \Swift_SmtpTransport::newInstance($this->getServerName(), $this->getPort(), $this->getSsl() ? 'ssl' : '')
 			->setUsername($this->getUsername())

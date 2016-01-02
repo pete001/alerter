@@ -21,7 +21,16 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function __construct()
 	{
-		$this->client = new \Services_Twilio($this->getTwilioSid(), $this->getTwilioToken());
+		$reflector = new \ReflectionClass('\Services_Twilio');
+		$this->client = $reflector->newInstanceArgs($this->getAuth());
+	}
+
+	/**
+	 * @inheretdoc
+	 */
+	public function getAuth()
+	{
+		return [$this->getTwilioSid(), $this->getTwilioToken()];
 	}
 
 	/**

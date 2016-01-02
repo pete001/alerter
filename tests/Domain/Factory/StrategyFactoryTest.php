@@ -18,6 +18,26 @@ class StrategyFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensure that an sms alert group returns the correct factory
+     */
+    public function testSmsStrategyFactory()
+    {
+        $strategy = new StrategyFactory();
+        $group = $strategy->initialise(new AlertGroup(['title' => 'sms']));
+        $this->isTrue($group instanceof SmsStrategyFactory);
+    }
+
+    /**
+     * Ensure that an email alert group returns the correct factory
+     */
+    public function testEmailStrategyFactory()
+    {
+        $strategy = new StrategyFactory();
+        $group = $strategy->initialise(new AlertGroup(['title' => 'email']));
+        $this->isTrue($group instanceof EmailStrategyFactory);
+    }
+
+    /**
      * Ensure that an invalid alert group returns an exception
      */
     public function testInvalidStrategyFactory()
