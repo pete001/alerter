@@ -15,8 +15,7 @@
         "mockery/mockery": "^0.9.4",
         "swiftmailer/swiftmailer": "*",
         "maknz/slack": "*",
-        "twilio/sdk": "*",
-        "laravel/laravel": "~5.1"
+        "twilio/sdk": "*"
     },
     "autoload": {
         "psr-4": {
