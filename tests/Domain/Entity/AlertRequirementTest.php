@@ -1,6 +1,5 @@
 <?php namespace Pete001\Alerter;
 
-use Pete001\Alerter\Domain\Entity\AbstractMotherEntity;
 use Pete001\Alerter\Domain\Entity\AlertRequirement;
 
 class AlertRequirementTest extends \PHPUnit_Framework_TestCase
