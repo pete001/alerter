@@ -13,6 +13,7 @@ interface RepositoryInterface
     public function getAll();
     public function firstOrCreate(Array $attributes);
     public function where($column, $comparison, $value);
+    public function with($relation);
     public function firstOrFail();
     public function begin();
     public function persist(AbstractEntity $entity);
