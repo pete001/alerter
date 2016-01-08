@@ -2,7 +2,7 @@
 
 class AlertGroupModel extends AbstractModel
 {
-	protected $table = 'alert_group';
+	protected $table = 'alert';
 
 	protected $fillable = ['title', 'short_description'];
 
