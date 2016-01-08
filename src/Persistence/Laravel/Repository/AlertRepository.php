@@ -1,7 +1,7 @@
 <?php namespace Pete001\Alerter\Persistence\Laravel\Repository;
 
 use Pete001\Alerter\Domain\Repository\AlertRepositoryInterface;
-use \Mother\Core\Domain\Entity\AlertGroup;
+use Pete001\Alerter\Domain\Entity\AlertGroup;
 
 class AlertRepository extends AbstractRepository implements AlertRepositoryInterface
 {
