@@ -28,6 +28,6 @@ class AlertModel extends AbstractModel
 
 	public function alert_group()
 	{
-		return $this->belongsTo('Pete001\Alerter\Persistence\Laravel\Model\AlertGroup');
+		return $this->belongsTo('Pete001\Alerter\Persistence\Laravel\Model\AlertGroupModel');
 	}
 }
