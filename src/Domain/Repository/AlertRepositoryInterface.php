@@ -7,5 +7,5 @@
  */
 interface AlertRepositoryInterface extends RepositoryInterface
 {
-	public function getAlertRequirement();
+
 }
