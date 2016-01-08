@@ -18,4 +18,9 @@ class Alert extends AbstractEntity
     {
         return $this->alert_group;
     }
+
+    public function setAlertGroup(AlertGroup $alertGroup)
+    {
+        return $this->alert_group = $alertGroup;
+    }
 }
