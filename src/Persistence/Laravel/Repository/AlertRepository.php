@@ -4,7 +4,7 @@ use Pete001\Alerter\Domain\Repository\AlertRepositoryInterface;
 
 class AlertRepository extends AbstractRepository implements AlertRepositoryInterface
 {
-	public function getAlertRequirment()
+	public function getAlertRequirement()
 	{
 		return $this->model->alertRequirement();
 	}
