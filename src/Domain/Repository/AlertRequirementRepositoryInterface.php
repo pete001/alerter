@@ -1,5 +1,7 @@
 <?php namespace Pete001\Alerter\Domain\Repository;
 
+use Pete001\alerter\Domain\Entity\Alert;
+
 /**
  * Interface extension for entity
  *
@@ -7,5 +9,7 @@
  */
 interface AlertRequirementRepositoryInterface extends RepositoryInterface
 {
+	public function getAlert();
 
+	public function setAlert(Alert $alert);
 }

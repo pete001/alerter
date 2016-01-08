@@ -11,4 +11,16 @@ class AlertRequirement extends AbstractEntity
     protected $short_description;
     protected $required;
     protected $alert_id;
+
+    private $alert_group;
+
+    public function getAlert()
+    {
+        return $this->alert;
+    }
+
+    public function setAlert(Alert $alert)
+    {
+        return $this->alert = $alert;
+    }
 }
