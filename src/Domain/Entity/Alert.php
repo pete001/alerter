@@ -12,10 +12,10 @@ class Alert extends AbstractEntity
     protected $full_description;
     protected $alert_group_id;
 
-    private $alert_requirement;
+    private $alert_group;
 
-    public function getAlertRequirement()
+    public function getAlertGroup()
     {
-        return $this->alert_requirement;
+        return $this->alert_group;
     }
 }

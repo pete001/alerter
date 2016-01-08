@@ -25,4 +25,9 @@ class AlertModel extends AbstractModel
 	{
 		return $this->belongsToMany('Pete001\Alerter\Persistence\Laravel\Model\AlertHook', 'alert_alert_hook_user', 'alert_id');
 	}
+
+	public function alert_group()
+	{
+		return $this->belongsTo('Pete001\Alerter\Persistence\Laravel\Model\AlertGroup');
+	}
 }
