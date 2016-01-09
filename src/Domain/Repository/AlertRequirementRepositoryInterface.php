@@ -9,7 +9,5 @@ use Pete001\alerter\Domain\Entity\Alert;
  */
 interface AlertRequirementRepositoryInterface extends RepositoryInterface
 {
-	public function getAlert();
 
-	public function setAlert(Alert $alert);
 }
