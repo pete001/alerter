@@ -1,6 +1,8 @@
 <?php namespace Pete001\Alerter\Domain\Service\Sms;
 
 use Pete001\Alerter\Domain\Service\SmsStrategyInterface;
+use Pete001\Alerter\Domain\Entity\AlertDetail;
+use Pete001\Alerter\Domain\Service\Traits\AlertTrait;
 
 /**
  * Twilio strategy for sms alerts
@@ -9,6 +11,8 @@ use Pete001\Alerter\Domain\Service\SmsStrategyInterface;
  */
 class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 {
+	use AlertTrait;
+
 	/**
 	 * The Twilio client
 	 *
@@ -17,10 +21,18 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	private $client;
 
 	/**
+	 * Array of AlertDetail objects
+	 *
+	 * @var Array
+	 */
+	private $requirements;
+
+	/**
 	 * Initialise the client
 	 */
-	public function __construct()
+	public function __construct(AlertDetail ...$requirements)
 	{
+		$this->requirements = $requirements;
 		$reflector = new \ReflectionClass('\Services_Twilio');
 		$this->client = $reflector->newInstanceArgs($this->getAuth());
 	}
@@ -38,7 +50,7 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function getTwilioSid()
 	{
-		return '';
+		return $this->required('twilio_sid', $this->requirements);
 	}
 
 	/**
@@ -46,7 +58,7 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function getTwilioToken()
 	{
-		return '';
+		return $this->required('twilio_token', $this->requirements);
 	}
 
 	/**
@@ -54,7 +66,7 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function getFromNumber()
 	{
-		return '';
+		return $this->required('from_number', $this->requirements);
 	}
 
 	/**
@@ -62,7 +74,7 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function getToNumber()
 	{
-		return '';
+		return $this->required('to_number', $this->requirements);
 	}
 
 	/**
