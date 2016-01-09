@@ -23,19 +23,16 @@ trait AlertTrait
 	 * and return the value if found, otherwise throw exception
 	 *
 	 * @param String           $property     The property to search for
-	 * @param Array            $requirements Array of requirements
+	 * @param Array            $details      Array of alert details
 	 *
 	 * @throws Error_Exception               If the property doesnt exist
 	 *
 	 * @return String                        The corresponding value
 	 */
-	public function required($property, $requirements) {
-		foreach ($requirements as $object) {
-			if (
-				property_exists($object, 'alert_requirement') &&
-				! empty($object->alert_requirement) &&
-				$property === $object->alert_requirement->title
-			) {
+	public function required($property, $details) {
+		foreach ($details as $object) {
+			$requirements = $object->getAlertRequirement();
+			if (property_exists($requirements, 'title') && $property === $object->alert_requirement->title) {
 				return $object->value;
 			}
 		}
