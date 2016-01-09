@@ -19,8 +19,7 @@ class AbstractRepository implements RepositoryInterface
 
     public function getById($id)
     {
-        $arrData = $this->model->findOrFail($id)->toArray();
-        return new $this->entityClassName($arrData);
+        return $this->hydrateCollectionToEntities($this->model->where('id', '=', $id)->get())[0];
     }
 
     public function getAll()
