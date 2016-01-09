@@ -1,6 +1,7 @@
 <?php namespace Pete001\Alerter\Domain\Factory;
 
 use Pete001\Alerter\Domain\Entity\AlertGroup;
+use Pete001\Alerter\Domain\Service\Traits\StringTrait;
 
 /**
  * Strategy factory for all alert groups
@@ -9,9 +10,11 @@ use Pete001\Alerter\Domain\Entity\AlertGroup;
  */
 class StrategyFactory
 {
+	use StringTrait;
+
 	public function initialise(AlertGroup $group)
 	{
-		switch ($group->title) {
+		switch ($this->textToDatastore($group->title)) {
 			case 'chat':
 				return new ChatStrategyFactory();
 				break;
