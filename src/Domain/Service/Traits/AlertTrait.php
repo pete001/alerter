@@ -29,11 +29,17 @@ trait AlertTrait
 	 *
 	 * @return String                        The corresponding value
 	 */
-	public function required($field, $requirements) {
+	public function required($property, $requirements) {
 		foreach ($requirements as $object) {
-			if ($field === $object->title) {
-				return $object;
+			if (
+				property_exists($object, 'alert_requirement') &&
+				! empty($object->alert_requirement) &&
+				$property === $object->alert_requirement->title
+			) {
+				return $object->value;
 			}
 		}
+
+		throw new \Error_Exception("Required alert property $property not set");
 	}
 }

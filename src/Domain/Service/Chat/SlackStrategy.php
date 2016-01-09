@@ -1,7 +1,7 @@
 <?php namespace Pete001\Alerter\Domain\Service\Chat;
 
 use Pete001\Alerter\Domain\Service\ChatStrategyInterface;
-use Pete001\Alerter\Domain\Entity\AlertRequirement;
+use Pete001\Alerter\Domain\Entity\AlertDetail;
 use Pete001\Alerter\Domain\Service\Traits\AlertTrait;
 use Maknz\Slack\Client as SlackClient;
 
@@ -22,7 +22,7 @@ class SlackStrategy implements ChatStrategyInterface
 	private $client;
 
 	/**
-	 * Array of AlertRequirement objects
+	 * Array of AlertDetail objects
 	 *
 	 * @var Array
 	 */
@@ -31,7 +31,7 @@ class SlackStrategy implements ChatStrategyInterface
 	/**
 	 * Initialise the client
 	 */
-	public function __construct(AlertRequirement ...$requirements)
+	public function __construct(AlertDetail ...$requirements)
 	{
 		$this->requirements = $requirements;
 		$this->client = new SlackClient($this->getAuth());

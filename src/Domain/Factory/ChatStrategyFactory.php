@@ -1,7 +1,7 @@
 <?php namespace Pete001\Alerter\Domain\Factory;
 
 use Pete001\Alerter\Domain\Entity\Alert;
-use Pete001\Alerter\Domain\Entity\AlertRequirement;
+use Pete001\Alerter\Domain\Entity\AlertDetail;
 use Pete001\Alerter\Domain\Service\Traits\AlertTrait;
 use Pete001\Alerter\Domain\Service\Chat\SlackStrategy;
 
@@ -14,7 +14,7 @@ class ChatStrategyFactory
 {
 	use AlertTrait;
 
-	public function create(Alert $alert, AlertRequirement ...$requirements)
+	public function create(Alert $alert, AlertDetail ...$requirements)
 	{
 		switch ($this->textToDatastore($alert->title)) {
 			case 'slack':
