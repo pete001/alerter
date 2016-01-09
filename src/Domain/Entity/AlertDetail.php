@@ -9,5 +9,5 @@ class AlertDetail extends AbstractEntity
 {
     protected $value;
     protected $alert_registry_id;
-    protected $alert_requirement_id
+    protected $alert_requirement_id;
 }
