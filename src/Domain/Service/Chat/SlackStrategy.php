@@ -33,8 +33,8 @@ class SlackStrategy implements ChatStrategyInterface
 	 */
 	public function __construct(AlertRequirement ...$requirements)
 	{
-		$this->client = new SlackClient($this->getAuth());
 		$this->requirements = $requirements;
+		$this->client = new SlackClient($this->getAuth());
 	}
 
 	/**
@@ -42,7 +42,7 @@ class SlackStrategy implements ChatStrategyInterface
 	 */
 	public function getAuth()
 	{
-		return $this->required('incoming_webhook_url');
+		return $this->required('incoming_webhook_url', $this->requirements);
 	}
 
 	/**
@@ -50,7 +50,7 @@ class SlackStrategy implements ChatStrategyInterface
 	 */
 	public function getUser()
 	{
-		return $this->required('username');
+		return $this->required('username', $this->requirements);
 	}
 
 	/**
@@ -58,7 +58,7 @@ class SlackStrategy implements ChatStrategyInterface
 	 */
 	public function getChannel()
 	{
-		return $this->required('channel');
+		return $this->required('channel', $this->requirements);
 	}
 
 	/**

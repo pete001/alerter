@@ -22,14 +22,15 @@ trait AlertTrait
 	 * Traverse an array of objects to search for a property
 	 * and return the value if found, otherwise throw exception
 	 *
-	 * @param String           $property The property to search for
+	 * @param String           $property     The property to search for
+	 * @param Array            $requirements Array of requirements
 	 *
-	 * @throws Error_Exception           If the property doesnt exist
+	 * @throws Error_Exception               If the property doesnt exist
 	 *
-	 * @return String                    The corresponding value
+	 * @return String                        The corresponding value
 	 */
-	public function required($field) {
-		foreach ($this->requirements as $object) {
+	public function required($field, $requirements) {
+		foreach ($requirements as $object) {
 			if ($field === $object->title) {
 				return $object;
 			}
