@@ -1,7 +1,7 @@
 <?php namespace Pete001\Alerter\Domain\Factory;
 
 use Pete001\Alerter\Domain\Entity\AlertGroup;
-use Pete001\Alerter\Domain\Service\Traits\StringTrait;
+use Pete001\Alerter\Domain\Service\Traits\AlertTrait;
 
 /**
  * Strategy factory for all alert groups
@@ -10,7 +10,7 @@ use Pete001\Alerter\Domain\Service\Traits\StringTrait;
  */
 class StrategyFactory
 {
-	use StringTrait;
+	use AlertTrait;
 
 	public function initialise(AlertGroup $group)
 	{

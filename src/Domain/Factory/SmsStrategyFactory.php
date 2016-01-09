@@ -1,7 +1,7 @@
 <?php namespace Pete001\Alerter\Domain\Factory;
 
 use Pete001\Alerter\Domain\Entity\Alert;
-use Pete001\Alerter\Domain\Service\Traits\StringTrait;
+use Pete001\Alerter\Domain\Service\Traits\AlertTrait;
 use Pete001\Alerter\Domain\Service\Sms\TwilioStrategy;
 
 /**
@@ -11,7 +11,7 @@ use Pete001\Alerter\Domain\Service\Sms\TwilioStrategy;
  */
 class SmsStrategyFactory
 {
-	use StringTrait;
+	use AlertTrait;
 
 	public function create(Alert $alert)
 	{

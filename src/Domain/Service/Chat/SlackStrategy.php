@@ -1,6 +1,8 @@
 <?php namespace Pete001\Alerter\Domain\Service\Chat;
 
 use Pete001\Alerter\Domain\Service\ChatStrategyInterface;
+use Pete001\Alerter\Domain\Entity\AlertRequirement;
+use Pete001\Alerter\Domain\Service\Traits\AlertTrait;
 use Maknz\Slack\Client as SlackClient;
 
 /**
@@ -10,6 +12,8 @@ use Maknz\Slack\Client as SlackClient;
  */
 class SlackStrategy implements ChatStrategyInterface
 {
+	use AlertTrait;
+
 	/**
 	 * The Slack client
 	 *
@@ -18,11 +22,19 @@ class SlackStrategy implements ChatStrategyInterface
 	private $client;
 
 	/**
+	 * Array of AlertRequirement objects
+	 *
+	 * @var Array
+	 */
+	private $requirements;
+
+	/**
 	 * Initialise the client
 	 */
-	public function __construct()
+	public function __construct(AlertRequirement ...$requirements)
 	{
 		$this->client = new SlackClient($this->getAuth());
+		$this->requirements = $requirements;
 	}
 
 	/**
@@ -30,7 +42,7 @@ class SlackStrategy implements ChatStrategyInterface
 	 */
 	public function getAuth()
 	{
-		return 'https://hooks.slack.com/services/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';
+		return $this->required('incoming_webhook_url');
 	}
 
 	/**
@@ -38,7 +50,7 @@ class SlackStrategy implements ChatStrategyInterface
 	 */
 	public function getUser()
 	{
-		return 'pete.cheyne';
+		return $this->required('username');
 	}
 
 	/**
@@ -46,7 +58,7 @@ class SlackStrategy implements ChatStrategyInterface
 	 */
 	public function getChannel()
 	{
-		return '#hubot-dev';
+		return $this->required('channel');
 	}
 
 	/**

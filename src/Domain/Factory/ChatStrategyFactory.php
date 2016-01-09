@@ -1,7 +1,8 @@
 <?php namespace Pete001\Alerter\Domain\Factory;
 
 use Pete001\Alerter\Domain\Entity\Alert;
-use Pete001\Alerter\Domain\Service\Traits\StringTrait;
+use Pete001\Alerter\Domain\Entity\AlertRequirement;
+use Pete001\Alerter\Domain\Service\Traits\AlertTrait;
 use Pete001\Alerter\Domain\Service\Chat\SlackStrategy;
 
 /**
@@ -11,13 +12,13 @@ use Pete001\Alerter\Domain\Service\Chat\SlackStrategy;
  */
 class ChatStrategyFactory
 {
-	use StringTrait;
+	use AlertTrait;
 
-	public function create(Alert $alert)
+	public function create(Alert $alert, AlertRequirement ...$requirements)
 	{
 		switch ($this->textToDatastore($alert->title)) {
 			case 'slack':
-				return new SlackStrategy();
+				return new SlackStrategy(...$requirements);
 				break;
 			default:
 				throw new \ErrorException("Invalid chat alert type ({$alert->title}) attempted");
