@@ -32,7 +32,7 @@ trait AlertTrait
 	public function required($property, $details) {
 		foreach ($details as $object) {
 			$requirements = $object->getAlertRequirement();
-			if (property_exists($requirements, 'title') && $property === $object->alert_requirement->title) {
+			if (property_exists($requirements, 'title') && $property === $requirements->title) {
 				return $object->value;
 			}
 		}
