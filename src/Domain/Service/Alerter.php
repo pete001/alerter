@@ -28,7 +28,12 @@ class Alerter implements AlerterInterface
     private $alertDetailRepository;
     private $alertStrategy;
 
-    private $registry = [];
+    /**
+     * Array to hold all alert services with associated message
+     *
+     * @var Array
+     */
+    private $alerts = [];
 
     public function __construct(
         AlertRepositoryInterface $alertRepository,
@@ -50,28 +55,60 @@ class Alerter implements AlerterInterface
     }
 
     /**
-     * Fire all the relevant alerts
+     * Queue all the relevant alerts
      *
      * @param String $userId  The generic user id who is triggering the alert(s)
      * @param String $hook    The name of the hook
      * @param String $message The raw message to the send
      *
-     * @return Void
+     * @return True
      */
-    public function fire($userId, $hook, $message)
+    public function queue($userId, $hook, $message)
     {
-        $result = [];
-        $this->getRegistry($userId, $hook);
-
-        foreach ($this->registry as $registry) {
+        foreach ($this->getRegistry($userId, $hook) as $registry) {
             $alert = $this->getAlert($registry);
             $group = $this->getGroup($alert);
             $details = $this->getDetails($registry);
             $service = $group->create($alert, ...$details);
-            $result[] = $service->send($message);
+            $this->addAlerts($service, $message);
         }
 
-        return $result;
+        return $this;
+    }
+
+    /**
+     * Execute all alerts
+     *
+     * @return Void
+     */
+    public function fire()
+    {
+        foreach ($this->getAlerts() as $alert) {
+            $alert[0]->send($alert[1]);
+        }
+    }
+
+    /**
+     * Add alerts to the queue
+     *
+     * @param Object $service The service object
+     * @param String $message The message to send
+     *
+     * @return Array
+     */
+    protected function addAlerts($service, $message)
+    {
+        return $this->alerts[] = [$service, $message];
+    }
+
+    /**
+     * Return all executable alerts
+     *
+     * @return Array
+     */
+    protected function getAlerts()
+    {
+        return $this->alerts;
     }
 
     /**

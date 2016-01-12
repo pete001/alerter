@@ -12,5 +12,5 @@ interface AlerterInterface
 	 *
 	 * @return Object
 	 */
-	public function fire($userId, $hook, $message);
+	public function queue($userId, $hook, $message);
 }
