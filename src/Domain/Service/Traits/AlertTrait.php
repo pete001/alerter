@@ -37,6 +37,6 @@ trait AlertTrait
 			}
 		}
 
-		throw new \Error_Exception("Required alert property $property not set");
+		throw new \Exception("Required alert property $property not set");
 	}
 }
