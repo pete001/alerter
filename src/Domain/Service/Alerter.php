@@ -11,7 +11,9 @@ use Pete001\Alerter\Domain\Entity\AlertRegistry;
 use Pete001\Alerter\Domain\Entity\Alert;
 
 use Pete001\Alerter\Domain\Factory\StrategyFactory;
+
 use Pete001\Alerter\Domain\Service\AlerterInterface;
+use Pete001\Alerter\Domain\Service\AlertStrategyInterface;
 
 /**
  * Top level alerter class to control firing alerts
@@ -20,6 +22,9 @@ use Pete001\Alerter\Domain\Service\AlerterInterface;
  */
 class Alerter implements AlerterInterface
 {
+    /**
+     * Clean repositories
+     */
     private $alertRepository;
     private $alertRequirementRepository;
     private $alertGroupRepository;
@@ -35,6 +40,17 @@ class Alerter implements AlerterInterface
      */
     private $alerts = [];
 
+    /**
+     * Initialise
+     *
+     * @param AlertRepositoryInterface            $alertRepository
+     * @param AlertRequirementRepositoryInterface $alertRequirementRepository
+     * @param AlertGroupRepositoryInterface       $alertGroupRepository
+     * @param AlertHookRepositoryInterface        $alertHookRepository
+     * @param AlertRegistryRepositoryInterface    $alertRegistryRepository
+     * @param AlertDetailRepositoryInterface      $alertDetailRepository
+     * @param StrategyFactory                     $alertStrategy
+     */
     public function __construct(
         AlertRepositoryInterface $alertRepository,
         AlertRequirementRepositoryInterface $alertRequirementRepository,
@@ -96,7 +112,7 @@ class Alerter implements AlerterInterface
      *
      * @return Array
      */
-    protected function addAlerts($service, $message)
+    public function addAlerts(AlertStrategyInterface $service, $message)
     {
         return $this->alerts[] = [$service, $message];
     }
@@ -106,7 +122,7 @@ class Alerter implements AlerterInterface
      *
      * @return Array
      */
-    protected function getAlerts()
+    public function getAlerts()
     {
         return $this->alerts;
     }
@@ -119,7 +135,7 @@ class Alerter implements AlerterInterface
      *
      * @return Object
      */
-    private function getRegistry($userId, $hook)
+    public function getRegistry($userId, $hook)
     {
         return $this->registry = $this->alertRegistryRepository
             ->where('users_id', '=', $userId)
@@ -134,7 +150,7 @@ class Alerter implements AlerterInterface
      *
      * @return Object
      */
-    private function getHook($hook)
+    public function getHook($hook)
     {
         return $this->alertHookRepository->where('title', '=', $hook)->firstOrFail();
     }
@@ -146,7 +162,7 @@ class Alerter implements AlerterInterface
      *
      * @return Object
      */
-    private function getAlert(AlertRegistry $registryAlert)
+    public function getAlert(AlertRegistry $registryAlert)
     {
         $alert = $this->alertRepository->begin();
         return $this->alertRepository->with('alertGroup')->getById($registryAlert->alert_id);
@@ -159,7 +175,7 @@ class Alerter implements AlerterInterface
      *
      * @return Array
      */
-    private function getDetails(AlertRegistry $registryAlert)
+    public function getDetails(AlertRegistry $registryAlert)
     {
         $detail = $this->alertDetailRepository->begin();
         return $this->alertDetailRepository->with('alertRequirement')->where('alert_registry_id', '=', $registryAlert->id)->getAll();
@@ -172,7 +188,7 @@ class Alerter implements AlerterInterface
      *
      * @return Object
      */
-    private function getGroup(Alert $alert)
+    public function getGroup(Alert $alert)
     {
         return $this->alertStrategy->initialise($alert->getAlertGroup());
     }
