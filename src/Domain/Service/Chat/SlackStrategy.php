@@ -62,6 +62,22 @@ class SlackStrategy implements ChatStrategyInterface
 	}
 
 	/**
+	 * Optional icon param
+	 *
+	 * @param Object $client The slack client
+	 *
+	 * @return Mixed
+	 */
+	protected function getIcon($client)
+	{
+		if ($optional = $this->optional('icon', $this->requirements)) {
+			$client = $client->withIcon($optional);
+		}
+
+		return $client;
+	}
+
+	/**
 	 * @inheritdoc
 	 */
 	public function getClient()
@@ -74,9 +90,15 @@ class SlackStrategy implements ChatStrategyInterface
 	 */
 	public function send($message)
 	{
-		return $this->getClient()
+		// Required params
+		$client = $this->getClient()
 			->from($this->getUser())
-			->to($this->getChannel())
-			->send($message);
+			->to($this->getChannel());
+
+		// Optional params
+		$client = $this->getIcon($client);
+
+		// Send
+		$client->send($message);
 	}
 }

@@ -39,4 +39,24 @@ trait AlertTrait
 
 		throw new \Exception("Required alert property $property not set");
 	}
+
+	/**
+	 * Traverse an array of objects to search for a property
+	 * and return the value if found, otherwise return false
+	 *
+	 * @param String           $property     The property to search for
+	 * @param Array            $details      Array of alert details
+	 *
+	 * @return Mixed                         The corresponding value or false
+	 */
+	public function optional($property, $details) {
+		foreach ($details as $object) {
+			$requirements = $object->getAlertRequirement();
+			if (property_exists($requirements, 'title') && $property === $requirements->title) {
+				return $object->value;
+			}
+		}
+
+		return false;
+	}
 }
