@@ -20,16 +20,16 @@ trait AlertTrait
 
 	/**
 	 * Traverse an array of objects to search for a property
-	 * and return the value if found, otherwise throw exception
+	 * and return the value if found, otherwise throw exception if required
 	 *
 	 * @param String           $property     The property to search for
 	 * @param Array            $details      Array of alert details
 	 *
-	 * @throws Error_Exception               If the property doesnt exist
+	 * @throws \ErrorException               If the property doesnt exist and its required
 	 *
-	 * @return String                        The corresponding value
+	 * @return Mixed                         The corresponding value, or false if optional and not found
 	 */
-	public function required($property, $details) {
+	public function getRequirement($property, $details, $required = true) {
 		foreach ($details as $object) {
 			$requirements = $object->getAlertRequirement();
 			if (property_exists($requirements, 'title') && $property === $requirements->title) {
@@ -37,25 +37,7 @@ trait AlertTrait
 			}
 		}
 
-		throw new \Exception("Required alert property $property not set");
-	}
-
-	/**
-	 * Traverse an array of objects to search for a property
-	 * and return the value if found, otherwise return false
-	 *
-	 * @param String           $property     The property to search for
-	 * @param Array            $details      Array of alert details
-	 *
-	 * @return Mixed                         The corresponding value or false
-	 */
-	public function optional($property, $details) {
-		foreach ($details as $object) {
-			$requirements = $object->getAlertRequirement();
-			if (property_exists($requirements, 'title') && $property === $requirements->title) {
-				return $object->value;
-			}
-		}
+		if ($required) throw new \ErrorException("Required alert property $property not set");
 
 		return false;
 	}

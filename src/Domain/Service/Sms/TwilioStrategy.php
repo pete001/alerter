@@ -50,7 +50,7 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function getTwilioSid()
 	{
-		return $this->required('twilio_sid', $this->requirements);
+		return $this->getRequirement('twilio_sid', $this->requirements);
 	}
 
 	/**
@@ -58,7 +58,7 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function getTwilioToken()
 	{
-		return $this->required('twilio_token', $this->requirements);
+		return $this->getRequirement('twilio_token', $this->requirements);
 	}
 
 	/**
@@ -66,7 +66,7 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function getFromNumber()
 	{
-		return $this->required('from_number', $this->requirements);
+		return $this->getRequirement('from_number', $this->requirements);
 	}
 
 	/**
@@ -74,7 +74,7 @@ class TwilioStrategy implements SmsStrategyInterface, TwilioStrategyInterface
 	 */
 	public function getToNumber()
 	{
-		return $this->required('to_number', $this->requirements);
+		return $this->getRequirement('to_number', $this->requirements);
 	}
 
 	/**
